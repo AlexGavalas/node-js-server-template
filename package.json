@@ -1,0 +1,45 @@
+{
+    "name": "node-js-template-server",
+    "version": "1.0.0",
+    "main": "src/app.js",
+    "license": "MIT",
+    "engines": {
+        "yarn": "1.22.0",
+        "node": "12.16.1"
+    },
+    "scripts": {
+        "prebuild": "yarn clean",
+        "build": "babel -d server-dist --copy-files src",
+        "clean": "rimraf server-dist coverage",
+        "lint": "eslint src",
+        "start": "nodemon --exec babel-node src/app.js --watch src",
+        "start:prod": "node server-dist/app.js",
+        "test": "cross-env APP_LOG_LEVEL=off jest",
+        "test:coverage": "yarn test --coverage --coverageReporters=text"
+    },
+    "dependencies": {
+        "cross-env": "7.0.2",
+        "dotenv": "8.2.0",
+        "express": "4.17.1",
+        "helmet": "3.21.3",
+        "log4js": "6.1.2",
+        "nodemon": "2.0.2"
+    },
+    "devDependencies": {
+        "@babel/cli": "7.8.4",
+        "@babel/core": "7.8.7",
+        "@babel/node": "7.8.7",
+        "@babel/preset-env": "7.8.7",
+        "eslint": "6.8.0",
+        "husky": "4.2.3",
+        "jest": "25.1.0",
+        "rimraf": "3.0.2",
+        "supertest": "4.0.2"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn lint",
+            "pre-push": "yarn test"
+        }
+    }
+}
