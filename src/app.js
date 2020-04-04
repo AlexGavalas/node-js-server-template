@@ -1,9 +1,11 @@
-import server from './server';
+import server from './util/setup-server';
 import { logger } from './util/logging';
 
 const { PORT } = process.env;
 
-server.listen(PORT, () => {
+const app = server.setup();
+
+app.listen(PORT, () => {
     
     logger.info(`Server listening on port: ${PORT}`);
 });
